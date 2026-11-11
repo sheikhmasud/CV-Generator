@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b3d">
+<title>CV / Resume Prompt Generator | Masud Rana Skill Academy</title>
+<style>
+:root{
+  --navy:#101b3d;--navy2:#182957;--blue:#315efb;--cyan:#22c7d9;
+  --ink:#18233f;--muted:#68738c;--line:#e4e9f2;--bg:#f4f7fc;
+  --white:#fff;--green:#14966b;--shadow:0 12px 32px rgba(20,35,75,.08);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.topbar{background:var(--navy);color:#fff;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:20;box-shadow:0 5px 20px rgba(7,16,42,.18)}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{height:42px;width:42px;border-radius:13px;background:linear-gradient(135deg,var(--cyan),#5574ff);display:grid;place-items:center;font-weight:900;font-size:18px;color:#fff;box-shadow:0 5px 15px #1b70a866}
+.brand-name{font-weight:800;letter-spacing:.1px;line-height:1.15}
+.brand-sub{font-size:11px;color:#b8c7ed;letter-spacing:1.1px;text-transform:uppercase;margin-top:4px}
+.top-pill{border:1px solid #ffffff30;border-radius:999px;padding:7px 12px;font-size:12px;color:#dce6ff;white-space:nowrap}
+.hero{background:radial-gradient(circle at 85% 20%,#314f9b 0,transparent 30%),linear-gradient(120deg,#101b3d,#1b3270 70%,#153d65);color:#fff;padding:48px 22px 42px}
+.hero-inner{max-width:1200px;margin:auto}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:#8de8f1;display:flex;align-items:center;gap:8px}
+.eyebrow:before{content:"";height:2px;width:25px;background:var(--cyan)}
+.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.12;max-width:760px;margin:14px 0}
+.hero h1 span{color:#7ee5ef}
+.hero p{max-width:760px;color:#d4def8;font-size:15px;margin:0}
+.hero-points{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.hero-points span{font-size:12px;padding:7px 11px;border-radius:999px;background:#ffffff13;border:1px solid #ffffff28;color:#e6efff}
+.page{max-width:1280px;margin:28px auto 70px;padding:0 20px}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr);gap:22px;align-items:start}
+.form-column{display:grid;gap:17px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.card-head{display:flex;align-items:center;gap:12px;padding:19px 21px 13px}
+.card-icon{height:38px;width:38px;border-radius:12px;background:#edf2ff;color:var(--blue);display:grid;place-items:center;font-size:18px;flex:0 0 auto}
+.card-title{font-size:16px;font-weight:800;margin:0}
+.card-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.card-body{padding:4px 21px 21px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:750;color:#35415e;margin:0 0 6px}
+input,select,textarea{width:100%;border:1px solid #dce3ef;background:#fbfcff;color:#18233f;border-radius:10px;padding:10px 12px;outline:none;transition:.18s}
+input,select{min-height:42px}
+textarea{min-height:88px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:#6b88ff;box-shadow:0 0 0 3px #315efb16;background:#fff}
+input::placeholder,textarea::placeholder{color:#a0a9ba}
+.hint{font-size:11px;color:#7a859c;margin-top:5px}
+.choice-row{display:flex;flex-wrap:wrap;gap:8px}
+.choice{border:1px solid #dce3ef;background:#fff;color:#52607c;padding:8px 11px;border-radius:9px;font-size:12px;font-weight:700;transition:.15s}
+.choice:hover{border-color:#9bb0ff;color:var(--blue)}
+.choice.active{background:#edf2ff;border-color:#9db2ff;color:#244bd6;box-shadow:inset 0 0 0 1px #d8e1ff}
+.section-label{font-size:12px;font-weight:800;color:#36425e;margin:15px 0 7px}
+.tag-entry{display:flex;gap:8px}
+.tag-entry input{flex:1}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;font-size:12px;transition:.16s}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 5px 12px #315efb2b}
+.btn-primary:hover{background:#244ce0;transform:translateY(-1px)}
+.btn-light{background:#eef2fa;color:#3c4966}
+.btn-light:hover{background:#e2e9f7}
+.btn-outline{background:#fff;border:1px solid #dce3ef;color:#46536e}
+.btn-danger{background:#fff0f0;color:#c34b4b;padding:6px 9px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.tag{display:inline-flex;align-items:center;gap:7px;border:1px solid #dce6ff;background:#f2f6ff;color:#3152b9;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:700}
+.tag button{border:0;background:none;color:#6b7eb6;font-size:15px;line-height:1;padding:0}
+.repeat-list{display:grid;gap:11px}
+.repeat-item{border:1px solid #e5eaf3;background:#fbfcff;border-radius:13px;padding:14px;position:relative}
+.repeat-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.repeat-title{font-size:12px;font-weight:850;color:#34415f}
+.repeat-item .grid-2{gap:10px}
+.repeat-item textarea{min-height:65px}
+.add-row{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.output-card{position:sticky;top:88px}
+.output-head{padding:19px 20px 15px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#fbfcff,#f3f6ff)}
+.output-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.live-label{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:850;letter-spacing:.8px;color:#11805e;background:#e8f8f1;border-radius:999px;padding:6px 9px}
+.live-dot{height:6px;width:6px;border-radius:50%;background:#19b77c;box-shadow:0 0 0 3px #19b77c20}
+.output-head h2{font-size:17px;margin:0}
+.output-head p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.mode-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px}
+.mode-tab{border:1px solid #dce3ef;background:#fff;color:#5a6680;border-radius:9px;padding:9px 4px;font-size:10px;font-weight:900;letter-spacing:.4px}
+.mode-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.output-body{padding:16px 18px 18px}
+.prompt-meta{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#8590a5;margin-bottom:9px}
+.prompt-box{width:100%;height:420px;min-height:320px;background:#101a34;color:#dce7ff;border:1px solid #24345e;border-radius:12px;padding:14px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;line-height:1.65;white-space:pre-wrap;overflow:auto}
+.output-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.output-actions .btn{padding:11px 8px}
+.output-actions .btn:first-child{grid-column:1/-1}
+.recent{border-top:1px solid var(--line);margin-top:16px;padding-top:13px}
+.recent-head{font-size:12px;font-weight:850;margin-bottom:8px}
+.recent-list{display:grid;gap:6px}
+.recent-entry{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#f7f9fd;border:1px solid #edf0f6;border-radius:8px;padding:7px 9px;font-size:10px;color:#5e6b85}
+.recent-entry button{border:0;background:none;color:var(--blue);font-weight:800;font-size:10px}
+.footer{text-align:center;color:#8490a7;font-size:11px;padding:28px 10px 8px}
+.footer strong{color:#4a5875}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#132448;color:#fff;padding:11px 16px;border-radius:10px;font-size:12px;font-weight:700;box-shadow:0 8px 25px #101b3d44;opacity:0;pointer-events:none;transition:.25s;z-index:50}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.checkline{display:flex;align-items:center;gap:8px;font-size:12px;color:#53617c;margin-top:9px}
+.checkline input{width:15px;height:15px;min-height:auto;accent-color:var(--blue)}
+hr.soft{border:0;border-top:1px solid #edf0f6;margin:16px 0}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.output-card{position:static}.prompt-box{height:360px}}
+@media(max-width:620px){.topbar{padding:11px 14px}.top-pill{display:none}.hero{padding:35px 17px}.page{padding:0 12px;margin-top:15px}.card-head{padding:16px 15px 10px}.card-body{padding:4px 15px 17px}.grid-2,.grid-3{grid-template-columns:1fr}.field.full{grid-column:auto}.output-head,.output-body{padding-left:14px;padding-right:14px}.prompt-box{height:390px}.hero p{font-size:13px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">MR</div>
+    <div><div class="brand-name">Masud Rana Skill Academy</div><div class="brand-sub">Learn · Build · Grow</div></div>
+  </div>
+  <div class="top-pill">CV & Resume Optimization Suite</div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Career Development Tool</div>
+    <h1>Build a stronger <span>CV / Resume</span><br>with one smart prompt.</h1>
+    <p>Enter your professional information, target job details and real achievements. Generate a structured, ATS-aware prompt to improve your CV / Resume with an AI assistant.</p>
+    <div class="hero-points"><span>✦ ATS-aware</span><span>✦ Recruiter-friendly</span><span>✦ 3 Prompt Modes</span><span>✦ Single-file Offline Tool</span></div>
+  </div>
+</section>
+
+<main class="page">
+<div class="layout">
+<div class="form-column">
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">👤</div><div><h2 class="card-title">Personal Information</h2><div class="card-sub">Contact & identity</div></div></div>
+  <div class="card-body grid-2">
+    <div class="field"><label for="fullName">Full Name</label><input id="fullName" placeholder="e.g. Md. Masud Rana"></div>
+    <div class="field"><label for="professionalTitle">Professional Title</label><input id="professionalTitle" placeholder="e.g. Accounts Officer"></div>
+    <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="hello@example.com"></div>
+    <div class="field"><label for="phone">Phone</label><input id="phone" placeholder="+880 1XXX-XXXXXX"></div>
+    <div class="field"><label for="location">Location</label><input id="location" placeholder="Dhaka, Bangladesh"></div>
+    <div class="field"><label for="linkedin">LinkedIn URL</label><input id="linkedin" placeholder="https://linkedin.com/in/username"></div>
+    <div class="field"><label for="portfolio">Portfolio / Website</label><input id="portfolio" placeholder="https://yourwebsite.com"></div>
+    <div class="field"><label for="github">GitHub / Project URL</label><input id="github" placeholder="https://github.com/username"></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">🎯</div><div><h2 class="card-title">Target Job & Purpose</h2><div class="card-sub">What to optimize for</div></div></div>
+  <div class="card-body">
+    <div class="section-label">Primary Goal</div>
+    <div class="choice-row" data-choice="goal">
+      <button class="choice active" data-value="Apply for a Specific Job">Apply for a Specific Job</button>
+      <button class="choice" data-value="Career Switch">Career Switch</button>
+      <button class="choice" data-value="Get More Interviews">Get More Interviews</button>
+      <button class="choice" data-value="Freelance / Client Work">Freelance / Client Work</button>
+      <button class="choice" data-value="Internship / Entry Level">Internship / Entry Level</button>
+      <button class="choice" data-value="Promotion / Internal Move">Promotion / Internal Move</button>
+      <button class="choice" data-value="Academic / Scholarship">Academic / Scholarship</button>
+    </div>
+    <div class="grid-2" style="margin-top:15px">
+      <div class="field"><label for="targetRoles">Target Role(s)</label><input id="targetRoles" placeholder="e.g. Accounts Officer, Finance Executive"></div>
+      <div class="field"><label for="seniority">Target Seniority</label><select id="seniority"><option>Entry Level</option><option selected>Junior / Associate</option><option>Mid-Level</option><option>Senior</option><option>Manager</option><option>Director / Executive</option><option>Student / Graduate</option></select></div>
+      <div class="field"><label for="market">Target Market</label><input id="market" value="Bangladesh / Remote / Global"></div>
+      <div class="field"><label for="reader">Ideal Reader</label><input id="reader" value="Recruiters, hiring managers and ATS"></div>
+      <div class="field full"><label for="jobDescription">Target Job Description (paste here)</label><textarea id="jobDescription" placeholder="Paste the job circular or job description here. Include responsibilities, requirements and preferred qualifications."></textarea></div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">🔎</div><div><h2 class="card-title">ATS Keywords & Skills</h2><div class="card-sub">Search visibility</div></div></div>
+  <div class="card-body">
+    <label for="keywordInput">Core Skills / Keywords</label>
+    <div class="tag-entry"><input id="keywordInput" placeholder="Add keyword e.g. Advanced Excel, ERP, Financial Reporting"><button class="btn btn-primary" id="addKeyword">+ Add</button></div>
+    <div class="tags" id="keywordTags"></div>
+    <div class="hint">Use skills that genuinely represent your experience. The prompt will prioritize relevance over keyword stuffing.</div>
+    <div class="section-label">Top Achievements / Value Propositions</div>
+    <div class="tag-entry"><input id="achievementInput" placeholder="e.g. Improved reporting accuracy by 20%"><button class="btn btn-primary" id="addAchievement">+ Add</button></div>
+    <div class="tags" id="achievementTags"></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">📝</div><div><h2 class="card-title">Professional Summary</h2><div class="card-sub">Opening pitch</div></div></div>
+  <div class="card-body">
+    <label for="summary">Current Summary / Objective (optional)</label>
+    <textarea id="summary" placeholder="Write your current professional summary or career objective. The optimizer will rewrite it into a stronger, ATS-friendly summary."></textarea>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">💼</div><div><h2 class="card-title">Work Experience</h2><div class="card-sub">Impact-focused career history</div></div></div>
+  <div class="card-body">
+    <div class="repeat-list" id="experienceList"></div>
+    <div class="add-row"><button class="btn btn-light" id="addExperience">＋ Add Work Experience</button></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">🚀</div><div><h2 class="card-title">Projects</h2><div class="card-sub">Proof of work</div></div></div>
+  <div class="card-body">
+    <div class="repeat-list" id="projectList"></div>
+    <div class="add-row"><button class="btn btn-light" id="addProject">＋ Add Project</button></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">🎓</div><div><h2 class="card-title">Education & Credentials</h2><div class="card-sub">Academic background</div></div></div>
+  <div class="card-body">
+    <div class="repeat-list" id="educationList"></div>
+    <div class="add-row"><button class="btn btn-light" id="addEducation">＋ Add Education</button></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">🏅</div><div><h2 class="card-title">Certifications & Awards</h2><div class="card-sub">Extra credibility</div></div></div>
+  <div class="card-body grid-2">
+    <div class="field"><label for="certInput">Certifications</label><div class="tag-entry"><input id="certInput" placeholder="e.g. Google Data Analytics"><button class="btn btn-primary" id="addCert">+ Add</button></div><div class="tags" id="certTags"></div></div>
+    <div class="field"><label for="awardInput">Awards & Honors</label><div class="tag-entry"><input id="awardInput" placeholder="e.g. Employee of the Month"><button class="btn btn-primary" id="addAward">+ Add</button></div><div class="tags" id="awardTags"></div></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">🧩</div><div><h2 class="card-title">Additional Information</h2><div class="card-sub">Extra sections</div></div></div>
+  <div class="card-body grid-2">
+    <div class="field"><label for="years">Years of Experience</label><input id="years" placeholder="e.g. 3"></div>
+    <div class="field"><label for="languages">Languages</label><input id="languages" placeholder="e.g. English, Bangla"></div>
+    <div class="field"><label for="availability">Availability</label><input id="availability" placeholder="Immediate / 1 month"></div>
+    <div class="field"><label for="volunteer">Volunteer / Extracurricular</label><input id="volunteer" placeholder="Community work, clubs, leadership..."></div>
+    <div class="field"><label for="interests">Interests / Hobbies (optional)</label><input id="interests" placeholder="Relevant professional interests"></div>
+    <div class="field"><label for="additional">Additional Context / Constraints</label><textarea id="additional" placeholder="Career gaps, employment preferences, relocation, notice period, etc."></textarea></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">⚙️</div><div><h2 class="card-title">Resume Sections & Strategy</h2><div class="card-sub">Prompt controls</div></div></div>
+  <div class="card-body grid-2">
+    <div class="field"><label for="strategySummary">Professional Summary Rewrite</label><textarea id="strategySummary">Generate a punchy, role-specific, ATS-optimized summary.</textarea></div>
+    <div class="field"><label for="strategyExperience">Experience Bullet Rewriting</label><textarea id="strategyExperience">Convert duties into strong action-and-impact bullets with measurable results where evidence exists.</textarea></div>
+    <div class="field"><label for="strategyProjects">Projects Section Strategy</label><textarea id="strategyProjects">Highlight relevant projects, tools, individual contribution and outcomes.</textarea></div>
+    <div class="field"><label for="strategySkills">Skills Prioritization</label><textarea id="strategySkills">Group and order skills by relevance, proficiency and ATS value.</textarea></div>
+    <div class="field"><label for="strategyATS">ATS Keyword Optimization</label><textarea id="strategyATS">Map job-description terms naturally without keyword stuffing or false claims.</textarea></div>
+    <div class="field"><label for="strategyEducation">Education & Certification Layout</label><textarea id="strategyEducation">Optimize ordering and formatting based on career stage and target role.</textarea></div>
+    <div class="field"><label for="strategyFormat">Formatting & Length Advice</label><textarea id="strategyFormat">Recommend a clean, readable layout, appropriate page count and consistent formatting.</textarea></div>
+    <div class="field"><label for="strategyChecklist">Completeness Checklist</label><textarea id="strategyChecklist">Identify missing, weak, unclear or unsupported sections before finalizing.</textarea></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><div class="card-icon">🎨</div><div><h2 class="card-title">Writing Style</h2><div class="card-sub">Voice & format</div></div></div>
+  <div class="card-body">
+    <div class="section-label">Professional Voice</div>
+    <div class="choice-row" data-choice="voice">
+      <button class="choice active" data-value="Professional & Clear">Professional & Clear</button>
+      <button class="choice" data-value="Confident & Results-Driven">Confident & Results-Driven</button>
+      <button class="choice" data-value="Warm & Human">Warm & Human</button>
+      <button class="choice" data-value="Executive & Strategic">Executive & Strategic</button>
+      <button class="choice" data-value="Academic & Formal">Academic & Formal</button>
+    </div>
+    <div class="section-label">Resume Format</div>
+    <div class="choice-row" data-choice="format">
+      <button class="choice active" data-value="Reverse-Chronological">Reverse-Chronological</button>
+      <button class="choice" data-value="Functional / Skills-Based">Functional / Skills-Based</button>
+      <button class="choice" data-value="Combination / Hybrid">Combination / Hybrid</button>
+      <button class="choice" data-value="Academic CV">Academic CV</button>
+    </div>
+    <div class="section-label">Content Density</div>
+    <div class="choice-row" data-choice="density">
+      <button class="choice" data-value="Concise (1 page)">Concise (1 page)</button>
+      <button class="choice active" data-value="Balanced (1–2 pages)">Balanced (1–2 pages)</button>
+      <button class="choice" data-value="Detailed (2+ pages)">Detailed (2+ pages)</button>
+    </div>
+    <div class="section-label">Language</div>
+    <div class="choice-row" data-choice="language">
+      <button class="choice active" data-value="English">English</button>
+      <button class="choice" data-value="Bangla">Bangla</button>
+      <button class="choice" data-value="English + Bangla">English + Bangla</button>
+    </div>
+  </div>
+</section>
+</div>
+
+<aside class="card output-card">
+  <div class="output-head">
+    <div class="output-title-row"><h2>Generated CV / Resume Prompt</h2><span class="live-label"><i class="live-dot"></i> LIVE</span></div>
+    <p>Your prompt updates automatically as you complete the form.</p>
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="standard">STANDARD</button>
+      <button class="mode-tab" data-mode="detailed">DETAILED</button>
+      <button class="mode-tab" data-mode="agent">AI AGENT</button>
+    </div>
+  </div>
+  <div class="output-body">
+    <div class="prompt-meta"><span id="promptModeLabel">STANDARD PROMPT</span><span id="promptStats">0 chars · 0 words</span></div>
+    <textarea class="prompt-box" id="promptOutput" readonly aria-label="Generated prompt"></textarea>
+    <div class="output-actions">
+      <button class="btn btn-primary" id="copyPrompt">▣ Copy CV / Resume Prompt</button>
+      <button class="btn btn-light" id="downloadPrompt">↓ Download .TXT</button>
+      <button class="btn btn-outline" id="resetForm">↺ Reset Form</button>
+    </div>
+    <div class="recent">
+      <div class="recent-head">Recent Copies</div>
+      <div class="recent-list" id="recentList"><div class="hint">Your copied prompts will appear here.</div></div>
+    </div>
+  </div>
+</aside>
+</div>
+<div class="footer">Built for practical CV / Resume optimization workflows · <strong>Masud Rana Skill Academy</strong><br>Founder: Md. Masud Rana</div>
+</main>
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const state = { goal:"Apply for a Specific Job", voice:"Professional & Clear", format:"Reverse-Chronological", density:"Balanced (1–2 pages)", language:"English", mode:"standard", keywords:[], achievements:[], certifications:[], awards:[] };
+  const fields = ["fullName","professionalTitle","email","phone","location","linkedin","portfolio","github","targetRoles","seniority","market","reader","jobDescription","summary","years","languages","availability","volunteer","interests","additional","strategySummary","strategyExperience","strategyProjects","strategySkills","strategyATS","strategyEducation","strategyFormat","strategyChecklist"];
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const val = id => ($(id)?.value || "").trim();
+  const listText = arr => arr.length ? arr.map(x => "• " + x).join("\n") : "Not provided";
+  const repeatData = type => [...document.querySelectorAll(`#${type}List .repeat-item`)].map(item => {
+    const obj = {};
+    item.querySelectorAll("[data-field]").forEach(el => obj[el.dataset.field] = el.value.trim());
+    return obj;
+  }).filter(o => Object.values(o).some(Boolean));
+
+  function renderTags(key, targetId) {
+    $(targetId).innerHTML = state[key].map((t,i)=>`<span class="tag">${esc(t)} <button type="button" aria-label="Remove ${esc(t)}" data-remove="${key}" data-index="${i}">×</button></span>`).join("");
+  }
+  function addTag(inputId,key,targetId) {
+    const text = $(inputId).value.trim();
+    if(!text) return;
+    if(!state[key].some(x=>x.toLowerCase()===text.toLowerCase())) state[key].push(text);
+    $(inputId).value=""; renderTags(key,targetId); updatePrompt();
+  }
+  function addRepeat(type, data={}) {
+    const config = {
+      experience:{title:"Work Experience",fields:[["role","Job Title","e.g. Accounts Officer"],["company","Company / Organization","Company name"],["dates","Employment Dates","Jan 2022 – Present"],["location","Location","Dhaka, Bangladesh"],["details","Responsibilities & Achievements","Describe your responsibilities, tools used, achievements and measurable impact."]]},
+      project:{title:"Project",fields:[["name","Project Name","Project title"],["role","Your Role","e.g. Project Lead / Developer"],["dates","Date / Duration","2025"],["url","Project URL (optional)","https://..."],["details","Project Description & Results","Explain the problem, your contribution, tools and outcomes."]]},
+      education:{title:"Education",fields:[["degree","Degree / Qualification","BBA in Accounting"],["institution","Institution","University / College"],["dates","Year / Duration","2020 – 2024"],["result","Result (optional)","CGPA / Grade / Division"],["details","Relevant Coursework / Details","Relevant subjects, thesis, honors, etc."]]}
+    }[type];
+    const container = $(type+"List");
+    const index = container.children.length + 1;
+    const item = document.createElement("div"); item.className="repeat-item";
+    item.innerHTML = `<div class="repeat-top"><div class="repeat-title">${config.title} #${index}</div><button class="btn btn-danger" type="button" data-remove-item>Remove</button></div><div class="grid-2">${config.fields.map(([key,label,placeholder])=>`<div class="field ${key==="details"?"full":""}"><label>${label}</label>${key==="details"?`<textarea data-field="${key}" placeholder="${placeholder}">${esc(data[key]||"")}</textarea>`:`<input data-field="${key}" placeholder="${placeholder}" value="${esc(data[key]||"")}">`}</div>`).join("")}</div>`;
+    item.querySelector("[data-remove-item]").addEventListener("click",()=>{item.remove();renumber(type);updatePrompt()});
+    item.querySelectorAll("input,textarea").forEach(el=>el.addEventListener("input",updatePrompt));
+    container.appendChild(item); updatePrompt();
+  }
+  function renumber(type){[...$(type+"List").children].forEach((item,i)=>item.querySelector(".repeat-title").textContent=({experience:"Work Experience",project:"Project",education:"Education"}[type])+" #"+(i+1))}
+  function section(title, body){return `\n${title.toUpperCase()}\n${"-".repeat(Math.min(title.length,42))}\n${body}\n`;}
+  function buildPrompt(){
+    const exp=repeatData("experience"), projects=repeatData("project"), education=repeatData("education");
+    const personal = [
+      `Full Name: ${val("fullName")||"Not provided"}`,`Professional Title: ${val("professionalTitle")||"Not provided"}`,
+      `Email: ${val("email")||"Not provided"}`,`Phone: ${val("phone")||"Not provided"}`,`Location: ${val("location")||"Not provided"}`,
+      `LinkedIn: ${val("linkedin")||"Not provided"}`,`Portfolio: ${val("portfolio")||"Not provided"}`,`GitHub / Projects: ${val("github")||"Not provided"}`
+    ].join("\n");
+    const target=[`Primary Goal: ${state.goal}`,`Target Role(s): ${val("targetRoles")||"Not provided"}`,`Seniority: ${val("seniority")}`,`Target Market: ${val("market")||"Not provided"}`,`Ideal Reader: ${val("reader")||"Not provided"}`,`Job Description:\n${val("jobDescription")||"Not provided"}`].join("\n");
+    const experience=exp.length?exp.map((o,i)=>`${i+1}. ${o.role||"Role not specified"} | ${o.company||"Company not specified"} | ${o.dates||"Dates not specified"} | ${o.location||"Location not specified"}\n${o.details||"Details not provided"}`).join("\n\n"):"No work experience entries provided.";
+    const projectText=projects.length?projects.map((o,i)=>`${i+1}. ${o.name||"Project not specified"} | Role: ${o.role||"Not specified"} | Date: ${o.dates||"Not specified"} | URL: ${o.url||"Not provided"}\n${o.details||"Details not provided"}`).join("\n\n"):"No projects provided.";
+    const educationText=education.length?education.map((o,i)=>`${i+1}. ${o.degree||"Qualification not specified"} | ${o.institution||"Institution not specified"} | ${o.dates||"Year not specified"} | Result: ${o.result||"Not provided"}\n${o.details||""}`).join("\n\n"):"No education entries provided.";
+    const additional=[`Years of Experience: ${val("years")||"Not provided"}`,`Languages: ${val("languages")||"Not provided"}`,`Availability: ${val("availability")||"Not provided"}`,`Volunteer / Extracurricular: ${val("volunteer")||"Not provided"}`,`Interests: ${val("interests")||"Not provided"}`,`Additional Context: ${val("additional")||"Not provided"}`].join("\n");
+    const strategies=[["Professional Summary Rewrite","strategySummary"],["Experience Bullet Rewriting","strategyExperience"],["Projects Section Strategy","strategyProjects"],["Skills Prioritization","strategySkills"],["ATS Keyword Optimization","strategyATS"],["Education & Certification Layout","strategyEducation"],["Formatting & Length Advice","strategyFormat"],["Completeness Checklist","strategyChecklist"]].map(([t,id])=>`${t}: ${val(id)}`).join("\n");
+    const style=[`Professional Voice: ${state.voice}`,`Resume Format: ${state.format}`,`Content Density: ${state.density}`,`Language: ${state.language}`].join("\n");
+    const base=`You are an expert CV / Resume strategist, ATS optimization specialist and professional career coach. Create a truthful, polished and recruiter-friendly CV / Resume tailored to the target role. Use only the facts supplied below. Never invent employers, dates, qualifications, skills, metrics or achievements. If important information is missing, flag it clearly and ask concise follow-up questions.\n\n${section("Candidate Information",personal)}${section("Target Job & Purpose",target)}${section("Core Skills & ATS Keywords",listText(state.keywords))}${section("Target Job Keywords",val("jobDescription")||"Use relevant terms from the job description above; do not force keywords.")}${section("Top Achievements",listText(state.achievements))}${section("Current Professional Summary",val("summary")||"Not provided — create a new one based on verified information.")}${section("Work Experience",experience)}${section("Projects",projectText)}${section("Education & Credentials",educationText)}${section("Certifications",listText(state.certifications))}${section("Awards & Honors",listText(state.awards))}${section("Additional Information",additional)}${section("Writing Style & Format",style)}${section("Resume Strategy Instructions",strategies)}`;
+    if(state.mode==="standard"){
+      return base+`\nTASK\n1. Produce a strong, role-specific CV / Resume using a clean ATS-readable structure.\n2. Improve wording, clarity, relevance and impact without changing the facts.\n3. Use concise action verbs and quantify results only when evidence is provided.\n4. Prioritize the most relevant skills and experience for the target job.\n5. Finish with a short list of missing information or suggested improvements.\n\nReturn the completed CV / Resume in ${state.language} with clear section headings.`;
+    }
+    if(state.mode==="detailed"){
+      return base+`\nDETAILED TASK & QUALITY REQUIREMENTS\n1. Analyze the target job description and identify the most important responsibilities, qualifications, tools and ATS keywords.\n2. Assess the candidate's profile against the role. Identify strengths, gaps and transferable skills.\n3. Recommend the best CV structure and explain briefly why it fits the candidate's career stage.\n4. Write a compelling professional headline and a tailored summary of 3–5 lines.\n5. Rewrite every relevant experience entry into achievement-focused bullets. Use the formula: action + task/context + method/tool + result. Do not fabricate metrics; use [add metric] only when a real figure is needed.\n6. Reorder and group skills by relevance. Separate technical skills, tools and professional strengths where useful.\n7. Select relevant projects, education, certifications and achievements. Remove repetition and low-value details.\n8. Optimize naturally for ATS parsing: standard headings, simple formatting, consistent dates and role-specific terminology. Avoid tables, graphics, icons, columns and keyword stuffing in the final CV.\n9. Follow the selected voice, language, format and content density.\n10. Provide the final CV / Resume, followed by an ATS keyword checklist, missing-information checklist and 5 practical improvement recommendations.\n\nIMPORTANT: Keep every claim accurate and defensible. If details are unclear, ask questions rather than guessing.`;
+    }
+    return base+`\nAI AGENT WORKFLOW\nAct as an autonomous CV / Resume optimization agent. Complete the workflow in stages and show the result of each stage:\n\nSTAGE 1 — PROFILE AUDIT\nReview the candidate information. List missing, inconsistent, weak or unclear details. Do not assume missing facts.\n\nSTAGE 2 — JOB ANALYSIS\nExtract the target role's key responsibilities, essential requirements, preferred skills and ATS keywords from the job description. Rank them by importance.\n\nSTAGE 3 — MATCHING & POSITIONING\nMap verified candidate evidence to job requirements. Identify strengths, transferable skills and gaps. Recommend a clear positioning strategy.\n\nSTAGE 4 — CONTENT OPTIMIZATION\nRewrite the headline, professional summary, work experience bullets, projects and skills. Use strong verbs and measurable outcomes only when supported by supplied facts.\n\nSTAGE 5 — ATS OPTIMIZATION\nUse standard section headings, plain text-friendly structure, consistent dates and natural keyword placement. Avoid keyword stuffing and formatting that may confuse ATS software.\n\nSTAGE 6 — FINAL DOCUMENT\nGenerate the complete CV / Resume in the selected language, voice, format and length. Make it ready to copy into a document editor.\n\nSTAGE 7 — VALIDATION\nCheck spelling, grammar, chronology, consistency, relevance and factual accuracy. Provide an ATS checklist, missing information list and suggested interview talking points.\n\nAGENT RULES\n- Never invent or exaggerate facts, credentials, job titles, dates or achievements.\n- Clearly mark placeholders that require the candidate's input.\n- Ask no more than 5 essential clarification questions at a time.\n- Keep the final document professional, readable and recruiter-friendly.`;
+  }
+  function updatePrompt(){
+    const prompt=buildPrompt(); $("promptOutput").value=prompt;
+    const words=prompt.trim()?prompt.trim().split(/\s+/).length:0;
+    $("promptStats").textContent=`${prompt.length.toLocaleString()} chars · ${words.toLocaleString()} words`;
+    $("promptModeLabel").textContent=state.mode.toUpperCase()+" PROMPT";
+  }
+  function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)}
+  function renderRecent(){
+    let items=[];try{items=JSON.parse(localStorage.getItem("mrsa_cv_recent")||"[]")}catch(e){}
+    $("recentList").innerHTML=items.length?items.slice(0,5).map((x,i)=>`<div class="recent-entry"><span>${esc(x.name||"Untitled prompt")} · ${esc(x.date)}</span><button type="button" data-recent="${i}">Load</button></div>`).join(""):'<div class="hint">Your copied prompts will appear here.</div>';
+    $("recentList").querySelectorAll("[data-recent]").forEach(btn=>btn.addEventListener("click",()=>{const item=items[Number(btn.dataset.recent)];if(item){$("promptOutput").value=item.prompt;updateStatsOnly(item.prompt);toast("Recent prompt loaded")}}));
+  }
+  function updateStatsOnly(prompt){const words=prompt.trim()?prompt.trim().split(/\s+/).length:0;$("promptStats").textContent=`${prompt.length.toLocaleString()} chars · ${words.toLocaleString()} words`;}
+  document.querySelectorAll("[data-choice]").forEach(group=>group.addEventListener("click",e=>{const btn=e.target.closest(".choice");if(!btn)return;group.querySelectorAll(".choice").forEach(b=>b.classList.remove("active"));btn.classList.add("active");state[group.dataset.choice]=btn.dataset.value;updatePrompt()}));
+  document.querySelectorAll(".mode-tab").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".mode-tab").forEach(b=>b.classList.remove("active"));btn.classList.add("active");state.mode=btn.dataset.mode;updatePrompt()}));
+  $("addKeyword").addEventListener("click",()=>addTag("keywordInput","keywords","keywordTags"));
+  $("addAchievement").addEventListener("click",()=>addTag("achievementInput","achievements","achievementTags"));
+  $("addCert").addEventListener("click",()=>addTag("certInput","certifications","certTags"));
+  $("addAward").addEventListener("click",()=>addTag("awardInput","awards","awardTags"));
+  [["keywordInput","keywords","keywordTags"],["achievementInput","achievements","achievementTags"],["certInput","certifications","certTags"],["awardInput","awards","awardTags"]].forEach(([input,key,target])=>$(input).addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addTag(input,key,target)}}));
+  document.addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(!b)return;const key=b.dataset.remove;state[key].splice(Number(b.dataset.index),1);const targets={keywords:"keywordTags",achievements:"achievementTags",certifications:"certTags",awards:"awardTags"};renderTags(key,targets[key]);updatePrompt()});
+  $("addExperience").addEventListener("click",()=>addRepeat("experience"));
+  $("addProject").addEventListener("click",()=>addRepeat("project"));
+  $("addEducation").addEventListener("click",()=>addRepeat("education"));
+  fields.forEach(id=>$(id).addEventListener("input",updatePrompt));
+  $("copyPrompt").addEventListener("click",async()=>{
+    const prompt=$("promptOutput").value;
+    try{await navigator.clipboard.writeText(prompt)}catch(e){$("promptOutput").select();document.execCommand("copy")}
+    let items=[];try{items=JSON.parse(localStorage.getItem("mrsa_cv_recent")||"[]")}catch(e){}
+    items.unshift({name:val("fullName")||val("targetRoles")||"CV Prompt",date:new Date().toLocaleString(),prompt});
+    try{localStorage.setItem("mrsa_cv_recent",JSON.stringify(items.slice(0,5)))}catch(e){}
+    renderRecent();toast("Prompt copied successfully!");
+  });
+  $("downloadPrompt").addEventListener("click",()=>{
+    const blob=new Blob([$("promptOutput").value],{type:"text/plain;charset=utf-8"});
+    const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="Skill-Academy-CV-Resume-Prompt.txt";a.click();URL.revokeObjectURL(url);toast("Prompt downloaded");
+  });
+  $("resetForm").addEventListener("click",()=>{
+    if(!confirm("Are you sure you want to reset all form data?"))return;
+    fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=1;else el.value=""});
+    ["experience","project","education"].forEach(type=>$(type+"List").innerHTML="");
+    Object.assign(state,{goal:"Apply for a Specific Job",voice:"Professional & Clear",format:"Reverse-Chronological",density:"Balanced (1–2 pages)",language:"English",mode:"standard",keywords:[],achievements:[],certifications:[],awards:[]});
+    document.querySelectorAll("[data-choice]").forEach(group=>{group.querySelectorAll(".choice").forEach(b=>b.classList.toggle("active",b.dataset.value===state[group.dataset.choice]))});
+    document.querySelectorAll(".mode-tab").forEach(b=>b.classList.toggle("active",b.dataset.mode==="standard"));
+    [["keywords","keywordTags"],["achievements","achievementTags"],["certifications","certTags"],["awards","awardTags"]].forEach(([k,t])=>renderTags(k,t));
+    updatePrompt();toast("Form reset");
+  });
+  renderTags("keywords","keywordTags");renderTags("achievements","achievementTags");renderTags("certifications","certTags");renderTags("awards","awardTags");
+  addRepeat("experience");addRepeat("education");updatePrompt();renderRecent();
+})();
+</script>
+</body>
+</html>
